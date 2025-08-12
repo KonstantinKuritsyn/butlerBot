@@ -53,10 +53,9 @@ check_docker() {
 
 # Создание рабочей директории
 create_directory() {
-    print_step "Создание рабочей директории..."
-    mkdir -p ~/butler-bot
-    cd ~/butler-bot
-    print_status "Рабочая директория создана: ~/butler-bot"
+    print_step "Проверка рабочей директории..."
+    CURRENT_DIR=$(pwd)
+    print_status "Рабочая директория: $CURRENT_DIR"
 }
 
 # Создание файла .env
@@ -87,7 +86,12 @@ EOF
 
 # Создание Dockerfile
 create_dockerfile() {
-    print_step "Создание Dockerfile..."
+    print_step "Проверка Dockerfile..."
+    
+    if [ -f Dockerfile ]; then
+        print_warning "Dockerfile уже существует. Оставляем существующий."
+        return
+    fi
     
     cat > Dockerfile << 'EOF'
 FROM python:3.12-slim
@@ -123,7 +127,12 @@ EOF
 
 # Создание requirements.txt
 create_requirements() {
-    print_step "Создание requirements.txt..."
+    print_step "Проверка requirements.txt..."
+    
+    if [ -f requirements.txt ]; then
+        print_warning "requirements.txt уже существует. Оставляем существующий."
+        return
+    fi
     
     cat > requirements.txt << 'EOF'
 python-telegram-bot[job-queue]==20.7
