@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+SETUP.md
+*.md
+
+# Database (will be created in container)
+*.db
+
+# Logs
+*.log
+
+# Mac
+.DS_Store
+
+# Temporary files
+.env.example
+.env.template
+main_old.py

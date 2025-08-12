@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  butler-bot:
+    build: .
+    container_name: butler-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_TOKEN_WISH_BOT=${TELEGRAM_TOKEN_WISH_BOT}
+      - WEATHER_API_TOKEN=${WEATHER_API_TOKEN}
+    volumes:
+      # Монтируем том для базы данных, чтобы данные сохранялись
+      - butler_data:/app/data
+      # Можно также смонтировать .env файл
+      - ./.env:/app/.env:ro
+    networks:
+      - butler_network
+
+volumes:
+  butler_data:
+    driver: local
+
+networks:
+  butler_network:
+    driver: bridge
